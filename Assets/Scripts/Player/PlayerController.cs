@@ -9,14 +9,20 @@ public class PlayerController : MonoBehaviour
     public @_2Dgame inputController;
     public Vector2 inputDirection;
     public float Speed;
+    public float JumpForce;
     public Rigidbody2D rb;
     public SpriteRenderer sr;
+    public GroundCheck groundCheck;
 
     private void Awake()
     {
         inputController = new @_2Dgame();
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
+
+        if(groundCheck == null){
+            groundCheck = GetComponentInChildren<GroundCheck>();
+        }
     }
     private void OnEnable()
     {
@@ -31,6 +37,11 @@ public class PlayerController : MonoBehaviour
     {
         inputDirection = inputController.Player.Move.ReadValue<Vector2>();
         Filp();
+
+        if (inputController.Player.Jump.WasPressedThisFrame() && groundCheck.isGrounded)
+        {
+            Jump();
+        }
     }
     private void FixedUpdate()
     {
@@ -42,6 +53,11 @@ public class PlayerController : MonoBehaviour
             sr.flipX = false;
         else if (inputDirection.x < 0)
             sr.flipX = true;
+    }
+
+    private void Jump()
+    {
+        rb.velocity = new Vector2(rb.velocity.x, JumpForce);
     }
 
 }

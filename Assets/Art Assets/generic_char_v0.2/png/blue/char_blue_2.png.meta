@@ -677,7 +677,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_blue_2_22
+      name: Attack_Two_1
       rect:
         serializedVersion: 2
         x: 0
@@ -698,7 +698,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_blue_2_23
+      name: Attack_Two_2
       rect:
         serializedVersion: 2
         x: 56
@@ -719,7 +719,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_blue_2_24
+      name: Attack_Two_3
       rect:
         serializedVersion: 2
         x: 112
@@ -740,7 +740,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_blue_2_25
+      name: Attack_Two_4
       rect:
         serializedVersion: 2
         x: 168
@@ -761,7 +761,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_blue_2_26
+      name: Attack_Two_5
       rect:
         serializedVersion: 2
         x: 224
@@ -782,7 +782,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_blue_2_27
+      name: Attack_Two_6
       rect:
         serializedVersion: 2
         x: 280
@@ -803,7 +803,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_blue_2_28
+      name: Attack_Two_7
       rect:
         serializedVersion: 2
         x: 336
@@ -824,7 +824,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_blue_2_29
+      name: Attack_Two_8
       rect:
         serializedVersion: 2
         x: 392
@@ -1065,6 +1065,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
+      Attack_Two_1: -2131261784233516491
+      Attack_Two_2: -8258493901958159639
+      Attack_Two_3: 8009187745801555199
+      Attack_Two_4: 6631416945959930027
+      Attack_Two_5: 8235823468698098155
+      Attack_Two_6: -2385033240706508030
+      Attack_Two_7: 3897334073690926672
+      Attack_Two_8: 1368882474785645607
       char_blue_2_0: -7788969592466400864
       char_blue_2_1: 6947235399915822845
       char_blue_2_10: 7287894198381639118
@@ -1080,14 +1088,6 @@ TextureImporter:
       char_blue_2_2: 4932829365207836860
       char_blue_2_20: 8491257667807011432
       char_blue_2_21: -611919317893734435
-      char_blue_2_22: -2131261784233516491
-      char_blue_2_23: -8258493901958159639
-      char_blue_2_24: 8009187745801555199
-      char_blue_2_25: 6631416945959930027
-      char_blue_2_26: 8235823468698098155
-      char_blue_2_27: -2385033240706508030
-      char_blue_2_28: 3897334073690926672
-      char_blue_2_29: 1368882474785645607
       char_blue_2_3: 4959928692145281967
       char_blue_2_30: -467204108400929412
       char_blue_2_31: -426567715450150482
