@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     public Rigidbody2D rb;
     public SpriteRenderer sr;
     public GroundCheck groundCheck;
+    
 
     private void Awake()
     {
@@ -20,9 +21,12 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
 
-        if(groundCheck == null){
+        if (groundCheck == null)
+        {
             groundCheck = GetComponentInChildren<GroundCheck>();
         }
+
+ 
     }
     private void OnEnable()
     {
@@ -41,6 +45,11 @@ public class PlayerController : MonoBehaviour
         if (inputController.Player.Jump.WasPressedThisFrame() && groundCheck.isGrounded)
         {
             Jump();
+        }
+
+        if(inputController.Player.Attack.WasPressedThisFrame())
+        {
+            Debug.Log("Attack");
         }
     }
     private void FixedUpdate()
