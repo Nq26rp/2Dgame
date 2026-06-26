@@ -13,7 +13,9 @@ public class PlayerController : MonoBehaviour
     public Rigidbody2D rb;
     public SpriteRenderer sr;
     public GroundCheck groundCheck;
-    
+    public bool isHurt;
+    public float hurtForce;
+    public bool isDead;
 
     private void Awake()
     {
@@ -26,7 +28,7 @@ public class PlayerController : MonoBehaviour
             groundCheck = GetComponentInChildren<GroundCheck>();
         }
 
- 
+
     }
     private void OnEnable()
     {
@@ -47,15 +49,24 @@ public class PlayerController : MonoBehaviour
             Jump();
         }
 
-        if(inputController.Player.Attack.WasPressedThisFrame())
+        if (inputController.Player.Attack.WasPressedThisFrame())
         {
             Debug.Log("Attack");
         }
     }
     private void FixedUpdate()
     {
+        if (!isHurt)
+        {
+            Move();
+        }
+    }
+
+    private void Move()
+    {
         rb.velocity = new Vector2(inputDirection.x * Speed, rb.velocity.y);
     }
+
     private void Filp()
     {
         if (inputDirection.x > 0)
@@ -67,6 +78,20 @@ public class PlayerController : MonoBehaviour
     private void Jump()
     {
         rb.velocity = new Vector2(rb.velocity.x, JumpForce);
+    }
+
+    public void GetHurt(Transform attacker)
+    {
+        isHurt = true;
+        rb.velocity = Vector2.zero;
+        Vector2 dir = new Vector2(transform.position.x - attacker.position.x, 0).normalized;
+        rb.AddForce(dir * hurtForce, ForceMode2D.Impulse);
+    }
+
+    public void Death()
+    {
+        isDead = true;
+        inputController.Player.Disable();
     }
 
 }

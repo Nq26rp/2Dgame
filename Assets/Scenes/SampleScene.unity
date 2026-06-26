@@ -336,6 +336,12 @@ MonoBehaviour:
   invulnerableDuration: 0
   invulnerable: 0
   invulnerableCounter: 0
+  OnTakeDamage:
+    m_PersistentCalls:
+      m_Calls: []
+  OnDeath:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &381876869
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -695,10 +701,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputDirection: {x: 0, y: 0}
   Speed: 10
-  JumpForce: 10
+  JumpForce: 7
   rb: {fileID: 742495360}
   sr: {fileID: 742495357}
   groundCheck: {fileID: 631221819}
+  isHurt: 0
+  hurtForce: 2
+  isDead: 0
 --- !u!95 &742495364
 Animator:
   serializedVersion: 7
@@ -733,6 +742,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddf386ebc2b921e488b734a5b21922d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 0}
+  rb: {fileID: 0}
+  groundCheck: {fileID: 0}
+  playerController: {fileID: 0}
 --- !u!114 &742495366
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -745,11 +758,53 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3b650abb696a77449889bcc6fe91f1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 20
   currentHealth: 0
   invulnerableDuration: 5
   invulnerable: 0
   invulnerableCounter: 0
+  OnTakeDamage:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 742495365}
+        m_TargetAssemblyTypeName: PlayerAnimation, Assembly-CSharp
+        m_MethodName: PlayHurt
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 742495363}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: GetHurt
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnDeath:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 742495363}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: Death
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1299971787
 GameObject:
   m_ObjectHideFlags: 0

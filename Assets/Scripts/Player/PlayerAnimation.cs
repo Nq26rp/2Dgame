@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class PlayerAnimation : MonoBehaviour
 {
-    Animator animator;
-    Rigidbody2D rb;
-    GroundCheck groundCheck;
-
+    [SerializeField] Animator animator;
+    [SerializeField] Rigidbody2D rb;
+    [SerializeField] GroundCheck groundCheck;
+    [SerializeField] PlayerController playerController;
     static readonly int VelocityX = Animator.StringToHash("velocityX");
     static readonly int VelocityY = Animator.StringToHash("velocityY");
     static readonly int IsGrounded = Animator.StringToHash("isGround");
@@ -17,6 +17,7 @@ public class PlayerAnimation : MonoBehaviour
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         groundCheck = GetComponentInChildren<GroundCheck>();
+        playerController = GetComponent<PlayerController>();
     }
 
     void Update()
@@ -24,5 +25,12 @@ public class PlayerAnimation : MonoBehaviour
         animator.SetFloat(VelocityX, Mathf.Abs(rb.velocity.x));
         animator.SetFloat(VelocityY, rb.velocity.y);
         animator.SetBool(IsGrounded, groundCheck.isGrounded);
+        animator.SetBool("isDead", playerController.isDead);
     }
+
+    public void PlayHurt()
+    {
+        animator.SetTrigger("Hurt");
+    }
+
 }
