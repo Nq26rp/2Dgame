@@ -191,7 +191,7 @@ public partial class @_2Dgame: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""ca25fbe5-6a8a-4160-9def-6593dd38c86c"",
-                    ""path"": ""<Keyboard>/space"",
+                    ""path"": ""<Keyboard>/k"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
@@ -202,7 +202,7 @@ public partial class @_2Dgame: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""5c381f16-d724-4fd4-bc21-ecc9f1dc3dc5"",
-                    ""path"": ""<Mouse>/leftButton"",
+                    ""path"": ""<Keyboard>/j"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",

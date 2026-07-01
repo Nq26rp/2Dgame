@@ -11,13 +11,10 @@ using UnityEngine;
 public class Attack : MonoBehaviour
 {
     public int damage = 10;
-    public float attackRange;
-    public float attackRate;
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        Character target = other.GetComponent<Character>();
-        if (target == null) return;
-        target.TakeDamage(this);
+        Debug.Log("Attack trigger enter: " + other.name);
+        other.GetComponent<Character>()?.TakeDamage(this);
     }
 }

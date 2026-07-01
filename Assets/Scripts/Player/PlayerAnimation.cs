@@ -26,11 +26,17 @@ public class PlayerAnimation : MonoBehaviour
         animator.SetFloat(VelocityY, rb.velocity.y);
         animator.SetBool(IsGrounded, groundCheck.isGrounded);
         animator.SetBool("isDead", playerController.isDead);
+        animator.SetBool("isAttack", playerController.isAttack);
     }
 
     public void PlayHurt()
     {
         animator.SetTrigger("Hurt");
+    }
+
+    public void PlayAttack()
+    {
+        animator.SetTrigger("attack");
     }
 
 }

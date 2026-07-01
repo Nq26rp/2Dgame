@@ -16,26 +16,32 @@ public class PlayerController : MonoBehaviour
     public bool isHurt;
     public float hurtForce;
     public bool isDead;
+    public PlayerAnimation playerAnimation;
+    public bool isAttack;
+    public PhysicsMaterial2D normalMaterial;
+    public PhysicsMaterial2D wallMaterial;
+    public Transform attackRoot;
 
     private void Awake()
     {
         inputController = new @_2Dgame();
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
-
+        playerAnimation = GetComponent<PlayerAnimation>();
         if (groundCheck == null)
         {
             groundCheck = GetComponentInChildren<GroundCheck>();
         }
-
-
+        attackRoot = transform.Find("Attack");
     }
     private void OnEnable()
     {
         inputController.Enable();
+        inputController.Player.Attack.started += PlayerAttack;
     }
     private void OnDisable()
     {
+        inputController.Player.Attack.started -= PlayerAttack;
         inputController.Disable();
     }
 
@@ -48,15 +54,11 @@ public class PlayerController : MonoBehaviour
         {
             Jump();
         }
-
-        if (inputController.Player.Attack.WasPressedThisFrame())
-        {
-            Debug.Log("Attack");
-        }
+        CheckState();
     }
     private void FixedUpdate()
     {
-        if (!isHurt)
+        if (!isHurt && !isAttack)
         {
             Move();
         }
@@ -70,9 +72,16 @@ public class PlayerController : MonoBehaviour
     private void Filp()
     {
         if (inputDirection.x > 0)
+        {
             sr.flipX = false;
+            attackRoot.localScale = new Vector3(1, 1, 1);
+        }
+
         else if (inputDirection.x < 0)
+        {
             sr.flipX = true;
+            attackRoot.localScale = new Vector3(-1, 1, 1);
+        }
     }
 
     private void Jump()
@@ -93,5 +102,18 @@ public class PlayerController : MonoBehaviour
         isDead = true;
         inputController.Player.Disable();
     }
+    public void PlayerAttack(InputAction.CallbackContext context)
+    {
+        if(groundCheck.isGrounded)
+        {
+            rb.velocity = new Vector2(0, rb.velocity.y);
+        }
+        playerAnimation.PlayAttack();
+        isAttack = true;
+    }
 
+    private void CheckState()
+    {
+        rb.sharedMaterial = groundCheck.isGrounded ? normalMaterial : wallMaterial;
+    }
 }
