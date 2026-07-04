@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Boar : Enemy
 {
-    public override void Move()
+    protected override void Awake()
     {
-        base.Move();
-        animator.SetBool("isWalk", true);
+        base.Awake();
+        patrolState = new BoarPatrolState();
     }
 }

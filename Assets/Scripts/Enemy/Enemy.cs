@@ -5,27 +5,31 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     Rigidbody2D rb;
-    protected Animator animator;
-    GroundCheck groundCheck;
+    public Animator animator;
+    public GroundCheck groundCheck;
     public Transform attacker;
 
     [Header("基本参数")]
     public float normalSpeed;
     public float chaseSpeed;
-    [SerializeField] float currentSpeed;
-    [SerializeField] Vector2 faceDir;
+    float currentSpeed;
+    public Vector2 faceDir;
     public float hurtForce;
 
     [Header("计时器")]
     public float waitTime;
     float waitTimeCounter;
-    [SerializeField] bool isWaiting;
+    public bool isWaiting;
 
     [Header("状态")]
     public bool isHurt;
     public bool isDead;
 
-    private void Awake()
+    protected BaseState currentState;
+    protected BaseState patrolState;
+    protected BaseState chaseState;
+
+    protected virtual void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
@@ -34,27 +38,33 @@ public class Enemy : MonoBehaviour
         waitTimeCounter = waitTime;
     }
 
+    private void OnEnable()
+    {
+        currentState = patrolState;
+        currentState.OnEnter(this);
+    }
+
     private void Update()
     {
         faceDir = new Vector2(-transform.localScale.x, 0);
-        if (groundCheck.touchLeftWall && faceDir.x < 0)
-        {
-            isWaiting = true;
-        }
-        if (faceDir.x > 0 && groundCheck.touchRightWall)
-        {
-            isWaiting = true;
-        }
+        currentState.LogicUpdate();
         WaitCounter();
     }
 
     private void FixedUpdate()
     {
-        if (!isHurt)
+        if (!isHurt && !isDead && !isWaiting)
         {
             Move();
         }
+        currentState.PhysicsUpdate();
     }
+
+    private void OnDisable()
+    {
+        currentState.OnExit();
+    }
+
     public virtual void Move()
     {
         rb.velocity = new Vector2(faceDir.x * currentSpeed, rb.velocity.y);
