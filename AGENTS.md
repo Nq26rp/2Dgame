@@ -33,3 +33,4 @@ A virtual X display is available at `DISPLAY=:1` for interactive play or running
 ### Gotchas
 - The first headless open is slow (asset import populates `Library/`); subsequent opens are fast. Do not delete `Library/`.
 - Only one Unity process may hold the project at a time (a lock is held on `Temp/UnityLockfile`).
+- If no license is available yet, you can still sanity-check the InputSystem-independent gameplay scripts (everything except `Assets/Scripts/Player/PlayerController.cs` and the generated `Assets/Setting/input/2Dgame.cs`, plus the files referencing `PlayerController`) with Unity's bundled `mcs` against the reference assemblies in `Editor/Data/Managed/UnityEngine/*.dll` and a `netstandard.dll` facade. Anything using the Input System needs a licensed Editor open to resolve the package first.
