@@ -12,7 +12,7 @@ public class Enemy : MonoBehaviour
     [Header("基本参数")]
     public float normalSpeed;
     public float chaseSpeed;
-    float currentSpeed;
+    public float currentSpeed;
     public Vector2 faceDir;
     public float hurtForce;
 
@@ -21,9 +21,18 @@ public class Enemy : MonoBehaviour
     float waitTimeCounter;
     public bool isWaiting;
 
+    public float lostTime;
+    public float lostTimeCounter;
+
     [Header("状态")]
     public bool isHurt;
     public bool isDead;
+
+    [Header("检测范围")]
+    public Vector2 centerOffset;
+    public Vector2 checkSize;
+    public float checkDistance;
+    public LayerMask attackLayer;
 
     protected BaseState currentState;
     protected BaseState patrolState;
@@ -87,6 +96,11 @@ public class Enemy : MonoBehaviour
                 Flip();
             }
         }
+
+        if (!FoundPlayer() && lostTimeCounter >= 0)
+        {
+            lostTimeCounter -= Time.deltaTime;
+        }
     }
 
     public void GetHurt(Transform attackerTrans)
@@ -104,6 +118,7 @@ public class Enemy : MonoBehaviour
         isHurt = true;
         Vector2 dir = new Vector2(transform.position.x - attacker.position.x, 0).normalized;
         animator.SetTrigger("hurt");
+        rb.velocity = new Vector2(0, rb.velocity.y);
         StartCoroutine(OnHurt(dir));
     }
 
@@ -125,5 +140,32 @@ public class Enemy : MonoBehaviour
     public void DestroyAfterAnimation()
     {
         Destroy(this.gameObject);
+    }
+
+    public bool FoundPlayer()
+    {
+        return Physics2D.BoxCast(transform.position + (Vector3)centerOffset, checkSize, 0, faceDir, checkDistance, attackLayer);
+
+    }
+
+    public void ChangeState(EnemyState state)
+    {
+        var newState = state switch
+        {
+            EnemyState.Patrol => patrolState,
+            EnemyState.Chase => chaseState,
+            _ => null
+        };
+        if (newState != null)
+        {
+            currentState.OnExit();
+            currentState = newState;
+            currentState.OnEnter(this);
+        }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(transform.position + (Vector3)centerOffset + new Vector3(checkDistance * (-transform.localScale.x), 0, 0), 0.2f);
     }
 }

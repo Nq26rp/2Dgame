@@ -7,11 +7,16 @@ public class BoarPatrolState : BaseState
     public override void OnEnter(Enemy enemy)
     {
         currentEnemy = enemy;
+        currentEnemy.currentSpeed = currentEnemy.normalSpeed;
     }
 
     public override void LogicUpdate()
     {
-        if (!currentEnemy.groundCheck.isGrounded &&
+        if(currentEnemy.FoundPlayer())
+        {
+            currentEnemy.ChangeState(EnemyState.Chase);
+        }
+        if (currentEnemy.groundCheck.isGrounded &&
         ((currentEnemy.groundCheck.touchLeftWall && currentEnemy.faceDir.x < 0) ||
         (currentEnemy.faceDir.x > 0 && currentEnemy.groundCheck.touchRightWall)))
         {
@@ -26,7 +31,7 @@ public class BoarPatrolState : BaseState
     
     public override void PhysicsUpdate()
     {
-        throw new System.NotImplementedException();
+
     }
 
     public override void OnExit()
