@@ -342,9 +342,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 207
-        width: 81
-        height: 97
+        y: 224
+        width: 80
+        height: 80
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -425,10 +425,10 @@ TextureImporter:
       name: Base-01_4
       rect:
         serializedVersion: 2
-        x: 306
-        y: 293
-        width: 60
-        height: 6
+        x: 307
+        y: 294
+        width: 58
+        height: 4
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -551,10 +551,10 @@ TextureImporter:
       name: Base-01_10
       rect:
         serializedVersion: 2
-        x: 307
-        y: 245
-        width: 58
-        height: 6
+        x: 308
+        y: 246
+        width: 56
+        height: 4
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -803,10 +803,10 @@ TextureImporter:
       name: Base-01_22
       rect:
         serializedVersion: 2
-        x: 242
-        y: 166
-        width: 59
-        height: 36
+        x: 243
+        y: 171
+        width: 58
+        height: 26
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -972,9 +972,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 2
-        y: 147
+        y: 162
         width: 13
-        height: 28
+        height: 13
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1181,10 +1181,10 @@ TextureImporter:
       name: Base-01_40
       rect:
         serializedVersion: 2
-        x: 242
-        y: 122
-        width: 60
-        height: 28
+        x: 243
+        y: 123
+        width: 58
+        height: 26
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1202,10 +1202,10 @@ TextureImporter:
       name: Base-01_41
       rect:
         serializedVersion: 2
-        x: 307
-        y: 149
-        width: 58
-        height: 6
+        x: 308
+        y: 150
+        width: 56
+        height: 4
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1475,10 +1475,10 @@ TextureImporter:
       name: Base-01_54
       rect:
         serializedVersion: 2
-        x: 4
+        x: 6
         y: 83
-        width: 6
-        height: 26
+        width: 4
+        height: 10
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2038,6 +2038,237 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Base-01_3
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 212
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e8f990a13f6c8e74d8e3043a55671915
+      internalID: -1108845367
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Base-01_6
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 212
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1d2e13bd55f87c44687135c6eb68da5a
+      internalID: 553287912
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Base-01_7
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 208
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 80863243023c8984fb4efe6a73644107
+      internalID: 740347804
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Base-01_14
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 208
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 03bbb959a58426343bdcdb038c45080a
+      internalID: -1321807083
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Base-01_29
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 208
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e00264df2acaede4b95b9a0eaf15452b
+      internalID: 1764016745
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Base-01_81
+      rect:
+        serializedVersion: 2
+        x: 308
+        y: 263
+        width: 56
+        height: 2
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 991bddd1b943a754a9ff6b1356012fef
+      internalID: -1913957815
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Base-01_82
+      rect:
+        serializedVersion: 2
+        x: 308
+        y: 231
+        width: 56
+        height: 2
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1717721ceabaa1943be91f3af6c47baa
+      internalID: -1714485989
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Base-01_83
+      rect:
+        serializedVersion: 2
+        x: 308
+        y: 199
+        width: 56
+        height: 2
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ea75e270da1cbb6419ae212207a69bd5
+      internalID: 1710331430
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Base-01_84
+      rect:
+        serializedVersion: 2
+        x: 308
+        y: 167
+        width: 56
+        height: 2
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6d7e6ba3ccacf9248ad1e295706e2dc3
+      internalID: 443723357
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Base-01_85
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 101
+        width: 5
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 48c8ffeb61bb3f74ea6b9027cd54d007
+      internalID: -466789288
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Base-01_86
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 147
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6590cb51285e1f6429ecc511b260dc6a
+      internalID: -1419570547
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -2055,6 +2286,7 @@ TextureImporter:
       Base-01_11: 8160045219647390997
       Base-01_12: -6243194383179346977
       Base-01_13: -2035980789902961352
+      Base-01_14: -1321807083
       Base-01_15: 551664576153709014
       Base-01_16: -8273571515554302314
       Base-01_17: 2319693472562707043
@@ -2070,6 +2302,8 @@ TextureImporter:
       Base-01_26: 3734479877659989375
       Base-01_27: 4096217041146350717
       Base-01_28: 2478032125117623652
+      Base-01_29: 1764016745
+      Base-01_3: -1108845367
       Base-01_30: 7454644139848167860
       Base-01_31: -4017124029861469692
       Base-01_32: -7256366915005641335
@@ -2102,6 +2336,7 @@ TextureImporter:
       Base-01_57: -1644077785691037541
       Base-01_58: 3146429280096349671
       Base-01_59: -5249656256635897205
+      Base-01_6: 553287912
       Base-01_60: -5127562975274684739
       Base-01_61: -5445198044735268253
       Base-01_62: 9152485452174549025
@@ -2112,6 +2347,7 @@ TextureImporter:
       Base-01_67: -7166688175291046560
       Base-01_68: -4890800590056538344
       Base-01_69: -6961963557677687833
+      Base-01_7: 740347804
       Base-01_70: 8953182615985255646
       Base-01_71: -5494794911597791391
       Base-01_72: -1175537162032160762
@@ -2124,6 +2360,12 @@ TextureImporter:
       Base-01_79: -7409120871016831238
       Base-01_8: 7691701027823125891
       Base-01_80: -6729332558515975304
+      Base-01_81: -1913957815
+      Base-01_82: -1714485989
+      Base-01_83: 1710331430
+      Base-01_84: 443723357
+      Base-01_85: -466789288
+      Base-01_86: -1419570547
       Base-01_9: -2842014097813584191
       Frame_1: -116305033050573686
       Head_Frame: -7670953985595583545

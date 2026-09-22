@@ -8,3 +8,9 @@ public enum EnemyState
     Chase,
     Skill
 }
+
+public enum SceneType
+{
+    Location,
+    Menu
+}
