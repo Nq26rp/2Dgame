@@ -10,9 +10,8 @@ public class UIManager : MonoBehaviour
     public PlayerStateBar playerStateBar;
     [Header("事件监听")] public CharacterEventSO healthEvent;
     public SceneLoadEventSO unloadedSceneEvent;
-    public VoidEventSO loadDataEvent;
+    public VoidEventSO afterSceneLoadedEvent;
     public VoidEventSO gameOverEvent;
-    public VoidEventSO backToMenuEvent;
     public FloatEventSO syncVolumeEvent;
 
     [Header("事件广播")] public VoidEventSO pauseEvent;
@@ -32,9 +31,8 @@ public class UIManager : MonoBehaviour
     {
         healthEvent.OnEventRaised += OnHealthEvent;
         unloadedSceneEvent.LoadRequestEvent += OnUnloadedSceneEvent;
-        loadDataEvent.OnEventRaised += OnLoadDataEvent;
+        afterSceneLoadedEvent.OnEventRaised += OnAfterSceneLoadedEvent;
         gameOverEvent.OnEventRaised += OnGameOverEvent;
-        backToMenuEvent.OnEventRaised += OnLoadDataEvent;
         syncVolumeEvent.OnEventRaised += OnSyncVolumeEvent;
     }
 
@@ -42,14 +40,15 @@ public class UIManager : MonoBehaviour
     {
         healthEvent.OnEventRaised -= OnHealthEvent;
         unloadedSceneEvent.LoadRequestEvent -= OnUnloadedSceneEvent;
-        loadDataEvent.OnEventRaised -= OnLoadDataEvent;
+        afterSceneLoadedEvent.OnEventRaised -= OnAfterSceneLoadedEvent;
         gameOverEvent.OnEventRaised -= OnGameOverEvent;
-        backToMenuEvent.OnEventRaised -= OnLoadDataEvent;
         syncVolumeEvent.OnEventRaised -= OnSyncVolumeEvent;
     }
 
     private void OnUnloadedSceneEvent(GameSceneSO sceneToLoad, Vector3 arg1, bool arg2)
     {
+        gameOverPanel.SetActive(false);
+        playerStateBar.SyncHealthImmediately();
         var isMenu = (sceneToLoad.sceneType == SceneType.Menu);
         playerStateBar.gameObject.SetActive(!isMenu);
     }
@@ -60,9 +59,9 @@ public class UIManager : MonoBehaviour
         playerStateBar.OnHealthChange(percentage);
     }
 
-    private void OnLoadDataEvent()
+    private void OnAfterSceneLoadedEvent()
     {
-        gameOverPanel.SetActive(false);
+        playerStateBar.SyncHealthImmediately();
     }
 
     private void OnGameOverEvent()

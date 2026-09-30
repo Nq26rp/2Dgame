@@ -81,6 +81,10 @@ public class SceneLoader : MonoBehaviour, ISaveable
         sceneToLoad = sceneToGo;
         this.posToGo = posToGo;
         this.fadeSceen = fadeSceen;
+
+        // 场景切换期间停止角色与旧场景的碰撞，避免刚恢复的生命值再次被扣除。
+        playerTrans.gameObject.SetActive(false);
+
         if (currentLoadedScene != null)
         {
             StartCoroutine(UnLoadPreviousScene());
@@ -101,7 +105,6 @@ public class SceneLoader : MonoBehaviour, ISaveable
         yield return new WaitForSeconds(fadeDuration);
         unloadSceneEvent.LoadRequestEvent(sceneToLoad, posToGo, true);
         yield return currentLoadedScene.sceneReference.UnLoadScene();
-        playerTrans.gameObject.SetActive(false);
         LoadNewScene();
     }
 

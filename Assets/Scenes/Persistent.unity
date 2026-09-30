@@ -136,7 +136,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5059381
 RectTransform:
   m_ObjectHideFlags: 0
@@ -396,6 +396,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   saveDataEvent: {fileID: 11400000, guid: 0e556abd9f2e2a84896a70880750921a, type: 2}
   loadDataEvent: {fileID: 11400000, guid: 3c1ad5eac1e768b40a310ad08123c947, type: 2}
+  newGameEvent: {fileID: 11400000, guid: d00247fe9ca6174469fc3ee97c712526, type: 2}
 --- !u!4 &96043629
 Transform:
   m_ObjectHideFlags: 0
@@ -1818,8 +1819,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneLoadEvent: {fileID: 11400000, guid: 3c5aa4d251b140943a6f1d4d587afa3f, type: 2}
   afterSceneLoadEvent: {fileID: 11400000, guid: 303c56981fd088544a4913108d4120c4, type: 2}
-  loadDataEvent: {fileID: 11400000, guid: 3c1ad5eac1e768b40a310ad08123c947, type: 2}
-  backToMenuEvent: {fileID: 11400000, guid: 82b967eb02bec6a4c950bd3a0d865702, type: 2}
   inputDirection: {x: 0, y: 0}
   Speed: 6
   JumpForce: 7
@@ -2403,19 +2402,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 794120103}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &838545831
 GameObject:
   m_ObjectHideFlags: 3
@@ -3928,16 +3915,15 @@ MonoBehaviour:
   playerStateBar: {fileID: 5059382}
   healthEvent: {fileID: 11400000, guid: 4c731d939a7a2cc4298b6548d53e1b1a, type: 2}
   unloadedSceneEvent: {fileID: 11400000, guid: 7da7788e0a876504a97e97a1c044352d, type: 2}
-  loadDataEvent: {fileID: 11400000, guid: 3c1ad5eac1e768b40a310ad08123c947, type: 2}
+  afterSceneLoadedEvent: {fileID: 11400000, guid: 303c56981fd088544a4913108d4120c4, type: 2}
   gameOverEvent: {fileID: 11400000, guid: 6dabdadec66e7d446b2274856ba9f7a9, type: 2}
-  backToMenuEvent: {fileID: 11400000, guid: 82b967eb02bec6a4c950bd3a0d865702, type: 2}
   syncVolumeEvent: {fileID: 11400000, guid: 94bbf802a08b0b14987664205d11c2ae, type: 2}
   pauseEvent: {fileID: 11400000, guid: a648097dfaf97554f9a21af71b7e3dae, type: 2}
   gameOverPanel: {fileID: 751914044}
   restartBtn: {fileID: 1111944288}
   settingBtn: {fileID: 794120105}
   pausePanel: {fileID: 1599273430}
-  volumeSlider: {fileID: 0}
+  volumeSlider: {fileID: 1324909434}
 --- !u!4 &2072985616
 Transform:
   m_ObjectHideFlags: 0

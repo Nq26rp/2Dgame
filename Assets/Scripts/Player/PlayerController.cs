@@ -8,8 +8,6 @@ public class PlayerController : MonoBehaviour
 {
     public SceneLoadEventSO sceneLoadEvent;
     public VoidEventSO afterSceneLoadEvent;
-    public VoidEventSO loadDataEvent;
-    public VoidEventSO backToMenuEvent;
     
     public @_2Dgame inputController;
     public Vector2 inputDirection;
@@ -29,7 +27,7 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        inputController = new @_2Dgame();
+        EnsureInputController();
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
         playerAnimation = GetComponent<PlayerAnimation>();
@@ -42,20 +40,24 @@ public class PlayerController : MonoBehaviour
     }
     private void OnEnable()
     {
+        EnsureInputController();
+        sceneLoadEvent.LoadRequestEvent -= OnLoadEvent;
         sceneLoadEvent.LoadRequestEvent += OnLoadEvent;
+        inputController.Player.Attack.started -= PlayerAttack;
         inputController.Player.Attack.started += PlayerAttack;
+        afterSceneLoadEvent.OnEventRaised -= OnAfterSceneLoadedEvent;
         afterSceneLoadEvent.OnEventRaised += OnAfterSceneLoadedEvent;
-        loadDataEvent.OnEventRaised += OnLoadDataEvent;
-        backToMenuEvent.OnEventRaised += OnLoadDataEvent;
     }
     private void OnDisable()
     {
         sceneLoadEvent.LoadRequestEvent -= OnLoadEvent;
-        inputController.Player.Attack.started -= PlayerAttack;
         afterSceneLoadEvent.OnEventRaised -= OnAfterSceneLoadedEvent;
-        loadDataEvent.OnEventRaised -= OnLoadDataEvent;
-        backToMenuEvent.OnEventRaised -= OnLoadDataEvent;
-        inputController.Disable();
+
+        if (inputController != null)
+        {
+            inputController.Player.Attack.started -= PlayerAttack;
+            inputController.Disable();
+        }
     }
 
     private void Update()
@@ -79,12 +81,26 @@ public class PlayerController : MonoBehaviour
 
     private void OnLoadEvent(GameSceneSO arg0, Vector3 arg1, bool arg2)
     {
+        EnsureInputController();
         inputController.Player.Disable();
     }
 
     private void OnAfterSceneLoadedEvent()
     {
+        EnsureInputController();
+        isDead = false;
+        isHurt = false;
+        isAttack = false;
+        rb.velocity = Vector2.zero;
         inputController.Player.Enable();
+    }
+
+    private void EnsureInputController()
+    {
+        if (inputController == null)
+        {
+            inputController = new @_2Dgame();
+        }
     }
 
     private void Move()
@@ -138,10 +154,5 @@ public class PlayerController : MonoBehaviour
     private void CheckState()
     {
         rb.sharedMaterial = groundCheck.isGrounded ? normalMaterial : wallMaterial;
-    }
-
-    private void OnLoadDataEvent()
-    {
-        isDead = false;
     }
 }

@@ -1,10 +1,6 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Microsoft.SqlServer.Server;
 using UnityEngine;
 
-public class SavePoint : MonoBehaviour
+public class SavePoint : MonoBehaviour, IInteractable
 {
     public VoidEventSO saveGameDataEvent;
     public SpriteRenderer spriteRenderer;
@@ -14,7 +10,11 @@ public class SavePoint : MonoBehaviour
 
     private void Awake()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        // The assigned renderer belongs to the M child. Do not replace the rock's sprite.
+        if (spriteRenderer == null)
+        {
+            spriteRenderer = transform.Find("M")?.GetComponent<SpriteRenderer>();
+        }
     }
 
     private void OnEnable()

@@ -10,9 +10,15 @@ public class DataManager : MonoBehaviour
 
     public VoidEventSO saveDataEvent;
     public VoidEventSO loadDataEvent;
+    public VoidEventSO newGameEvent;
     
     private List<ISaveable> saveableList = new List<ISaveable>();
     private Data saveData;
+
+    public bool HasSaveData =>
+        saveData != null &&
+        !string.IsNullOrEmpty(saveData.sceneToSave) &&
+        saveData.characterPosDict.Count > 0;
     
     private void Awake()
     {
@@ -40,7 +46,7 @@ public class DataManager : MonoBehaviour
 
     private void Update()
     {
-        if (Keyboard.current.lKey.wasPressedThisFrame)
+        if (Keyboard.current != null && Keyboard.current.lKey.wasPressedThisFrame)
         {
             Load();
         }
@@ -74,7 +80,14 @@ public class DataManager : MonoBehaviour
 
     public void Load()
     {
-        foreach (ISaveable saveable in saveableList)
+        if (!HasSaveData)
+        {
+            Debug.LogWarning("没有可读取的存档，将从新游戏开始。");
+            newGameEvent.RaiseEvent();
+            return;
+        }
+
+        foreach (ISaveable saveable in saveableList.ToArray())
         {
             saveable.LoadData(saveData);
         }
