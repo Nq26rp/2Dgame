@@ -2,10 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public SceneLoadEventSO sceneLoadEvent;
+    public VoidEventSO afterSceneLoadEvent;
+    public VoidEventSO loadDataEvent;
+    public VoidEventSO backToMenuEvent;
+    
     public @_2Dgame inputController;
     public Vector2 inputDirection;
     public float Speed;
@@ -33,15 +38,23 @@ public class PlayerController : MonoBehaviour
             groundCheck = GetComponentInChildren<GroundCheck>();
         }
         attackRoot = transform.Find("Attack");
+        inputController.Enable();
     }
     private void OnEnable()
     {
-        inputController.Enable();
+        sceneLoadEvent.LoadRequestEvent += OnLoadEvent;
         inputController.Player.Attack.started += PlayerAttack;
+        afterSceneLoadEvent.OnEventRaised += OnAfterSceneLoadedEvent;
+        loadDataEvent.OnEventRaised += OnLoadDataEvent;
+        backToMenuEvent.OnEventRaised += OnLoadDataEvent;
     }
     private void OnDisable()
     {
+        sceneLoadEvent.LoadRequestEvent -= OnLoadEvent;
         inputController.Player.Attack.started -= PlayerAttack;
+        afterSceneLoadEvent.OnEventRaised -= OnAfterSceneLoadedEvent;
+        loadDataEvent.OnEventRaised -= OnLoadDataEvent;
+        backToMenuEvent.OnEventRaised -= OnLoadDataEvent;
         inputController.Disable();
     }
 
@@ -62,6 +75,16 @@ public class PlayerController : MonoBehaviour
         {
             Move();
         }
+    }
+
+    private void OnLoadEvent(GameSceneSO arg0, Vector3 arg1, bool arg2)
+    {
+        inputController.Player.Disable();
+    }
+
+    private void OnAfterSceneLoadedEvent()
+    {
+        inputController.Player.Enable();
     }
 
     private void Move()
@@ -115,5 +138,10 @@ public class PlayerController : MonoBehaviour
     private void CheckState()
     {
         rb.sharedMaterial = groundCheck.isGrounded ? normalMaterial : wallMaterial;
+    }
+
+    private void OnLoadDataEvent()
+    {
+        isDead = false;
     }
 }

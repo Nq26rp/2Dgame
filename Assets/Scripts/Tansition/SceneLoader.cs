@@ -7,18 +7,24 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.ResourceManagement.ResourceProviders;
 using UnityEngine.SceneManagement;
 
-public class SceneLoader : MonoBehaviour
+public class SceneLoader : MonoBehaviour, ISaveable
 {
     public Transform playerTrans;
     public Vector3 firstPos;
-    
+    public Vector3 menuPos;
+
     public SceneLoadEventSO loadEventSO;
 
     public GameSceneSO firstLoadScene;
     public GameSceneSO currentLoadedScene;
+    public GameSceneSO menuScene;
 
     public VoidEventSO afterSceneLoadedEvent;
-    
+    public FadeEventSO fadeEvent;
+    public VoidEventSO newGameEvent;
+    public SceneLoadEventSO unloadSceneEvent;
+    public VoidEventSO backToMenuEvent;
+
     private GameSceneSO sceneToLoad;
     private Vector3 posToGo;
     private bool fadeSceen;
@@ -35,32 +41,42 @@ public class SceneLoader : MonoBehaviour
 
     private void Start()
     {
-        NewGame();
+        loadEventSO.RaiseLoadRequestEvent(menuScene, menuPos, true);
+        //NewGame();
     }
 
     private void OnEnable()
     {
         loadEventSO.LoadRequestEvent += OnLoadRequestEvent;
+        newGameEvent.OnEventRaised += NewGame;
+        backToMenuEvent.OnEventRaised += OnBackToMenu;
+        ISaveable saveable = this;
+        saveable.RegisterSaveData();
     }
 
     private void OnDisable()
     {
         loadEventSO.LoadRequestEvent -= OnLoadRequestEvent;
+        newGameEvent.OnEventRaised -= NewGame;
+        backToMenuEvent.OnEventRaised -= OnBackToMenu;
+        ISaveable saveable = this;
+        saveable.UnregisterSaveData();
     }
 
 
     private void NewGame()
     {
         sceneToLoad = firstLoadScene;
-        OnLoadRequestEvent(firstLoadScene, firstPos, true);
+        loadEventSO.RaiseLoadRequestEvent(sceneToLoad, firstPos, true);
     }
-    
+
     private void OnLoadRequestEvent(GameSceneSO sceneToGo, Vector3 posToGo, bool fadeSceen)
     {
         if (isLoading)
         {
             return;
         }
+
         isLoading = true;
         sceneToLoad = sceneToGo;
         this.posToGo = posToGo;
@@ -79,9 +95,11 @@ public class SceneLoader : MonoBehaviour
     {
         if (fadeSceen)
         {
+            fadeEvent.FadeIn(fadeDuration);
         }
 
         yield return new WaitForSeconds(fadeDuration);
+        unloadSceneEvent.LoadRequestEvent(sceneToLoad, posToGo, true);
         yield return currentLoadedScene.sceneReference.UnLoadScene();
         playerTrans.gameObject.SetActive(false);
         LoadNewScene();
@@ -100,8 +118,41 @@ public class SceneLoader : MonoBehaviour
         playerTrans.gameObject.SetActive(true);
         if (fadeSceen)
         {
+            fadeEvent.FadeOut(fadeDuration);
         }
+
         isLoading = false;
-        afterSceneLoadedEvent.RaiseEvent();
+
+        if (currentLoadedScene.sceneType == SceneType.Location)
+        {
+            afterSceneLoadedEvent.RaiseEvent();
+        }
+    }
+
+    public DataDefinition GetDataID()
+    {
+        return GetComponent<DataDefinition>();
+    }
+
+    public void GetSaveData(Data data)
+    {
+        data.SaveGameScene(currentLoadedScene);
+    }
+
+    public void LoadData(Data data)
+    {
+        var playerID = playerTrans.GetComponent<DataDefinition>().ID;
+        if (data.characterPosDict.ContainsKey(playerID))
+        {
+            posToGo = data.characterPosDict[playerID];
+            sceneToLoad = data.GetSavedScene();
+            OnLoadRequestEvent(sceneToLoad, posToGo, true);
+        }
+    }
+
+    private void OnBackToMenu()
+    {
+        sceneToLoad = menuScene;
+        loadEventSO.RaiseLoadRequestEvent(sceneToLoad, menuPos, true);
     }
 }

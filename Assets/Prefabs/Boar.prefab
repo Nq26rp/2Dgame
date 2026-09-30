@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 1068115897302647706}
   - component: {fileID: 839014336713006312}
   - component: {fileID: 1610370833431416383}
+  - component: {fileID: -4656609779374428043}
   m_Layer: 10
   m_Name: Boar
   m_TagString: Untagged
@@ -274,6 +275,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  newGameEvent: {fileID: 11400000, guid: d00247fe9ca6174469fc3ee97c712526, type: 2}
 --- !u!114 &1068115897302647706
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -342,3 +344,17 @@ MonoBehaviour:
   isGrounded: 0
   touchLeftWall: 0
   touchRightWall: 0
+--- !u!114 &-4656609779374428043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5248930900841685973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2718909726bab14899fcf12b65f6e52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  persistentType: 0
+  ID: 331dd1cf-09b3-4fee-b4c8-df6b5e797070

@@ -1,28 +1,41 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Character : MonoBehaviour
+public class Character : MonoBehaviour, ISaveable
 {
-    [Header("属性")]
-    public float maxHealth;
+    [Header("属性")] public float maxHealth;
     public float currentHealth;
 
-    [Header("无敌时间")]
-    public float invulnerableDuration;
+    [Header("无敌时间")] public float invulnerableDuration;
     public bool invulnerable;
     public float invulnerableCounter;
-    [Header("事件")]
-    public UnityEvent<Character> OnHealthChange;
+    [Header("事件")] public UnityEvent<Character> OnHealthChange;
     public UnityEvent<Transform> OnTakeDamage;
     public UnityEvent OnDeath;
-    
-    void Start()
+    public VoidEventSO newGameEvent;
+
+    void NewGame()
     {
         currentHealth = maxHealth;
         OnHealthChange?.Invoke(this);
+    }
+
+    private void OnEnable()
+    {
+        newGameEvent.OnEventRaised += NewGame;
+        ISaveable saveable = this;
+        saveable.RegisterSaveData();
+    }
+
+    private void OnDisable()
+    {
+        newGameEvent.OnEventRaised -= NewGame;
+        ISaveable saveable = this;
+        saveable.UnregisterSaveData();
     }
 
     void Update()
@@ -42,9 +55,12 @@ public class Character : MonoBehaviour
         if (other.tag == "Water")
         {
             //死亡，更新血量
-            currentHealth = 0;
-            OnHealthChange?.Invoke(this);
-            OnDeath?.Invoke();
+            if (currentHealth > 0)
+            {
+                currentHealth = 0;
+                OnHealthChange?.Invoke(this);
+                OnDeath?.Invoke();
+            }
         }
     }
 
@@ -55,7 +71,7 @@ public class Character : MonoBehaviour
 
         if (currentHealth - attacker.damage > 0)
         {
-            currentHealth -= attacker.damage; 
+            currentHealth -= attacker.damage;
             TriggerInvulnerable();
             OnTakeDamage?.Invoke(attacker.transform);
         }
@@ -64,6 +80,7 @@ public class Character : MonoBehaviour
             currentHealth = 0;
             OnDeath?.Invoke();
         }
+
         OnHealthChange?.Invoke(this);
     }
 
@@ -73,6 +90,36 @@ public class Character : MonoBehaviour
         {
             invulnerable = true;
             invulnerableCounter = invulnerableDuration;
+        }
+    }
+
+    public DataDefinition GetDataID()
+    {
+        return GetComponent<DataDefinition>();
+    }
+
+    public void GetSaveData(Data data)
+    {
+        if (data.characterPosDict.ContainsKey(GetDataID().ID))
+        {
+            data.characterPosDict[GetDataID().ID] = transform.position;
+            data.floatSavedData[GetDataID().ID + "health"] = this.currentHealth;
+        }
+        else
+        {
+            data.characterPosDict.Add(GetDataID().ID, transform.position);
+            data.floatSavedData.Add(GetDataID().ID + "health", this.currentHealth);
+        }
+    }
+
+    public void LoadData(Data data)
+    {
+        if (data.characterPosDict.ContainsKey(GetDataID().ID))
+        {
+            transform.position = data.characterPosDict[GetDataID().ID];
+            this.currentHealth = data.floatSavedData[GetDataID().ID + "health"];
+
+            OnHealthChange?.Invoke(this);
         }
     }
 }

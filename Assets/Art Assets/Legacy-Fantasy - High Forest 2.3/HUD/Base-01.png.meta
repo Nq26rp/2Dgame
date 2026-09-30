@@ -1073,7 +1073,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Base-01_35
+      name: X
       rect:
         serializedVersion: 2
         x: 19
@@ -1661,7 +1661,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Base-01_63
+      name: Setting
       rect:
         serializedVersion: 2
         x: 49
@@ -2236,7 +2236,7 @@ TextureImporter:
         width: 5
         height: 7
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -2257,7 +2257,7 @@ TextureImporter:
         width: 10
         height: 10
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -2309,7 +2309,6 @@ TextureImporter:
       Base-01_32: -7256366915005641335
       Base-01_33: -4336581119566245258
       Base-01_34: -4784793880564212288
-      Base-01_35: -4824716200976373178
       Base-01_36: -7014322169558433219
       Base-01_37: -1513877441842158255
       Base-01_38: -8869016917307958816
@@ -2340,7 +2339,6 @@ TextureImporter:
       Base-01_60: -5127562975274684739
       Base-01_61: -5445198044735268253
       Base-01_62: 9152485452174549025
-      Base-01_63: -6699065159252305155
       Base-01_64: 2027795423294278688
       Base-01_65: 7791650111064656121
       Base-01_66: 1590142826768050813
@@ -2372,6 +2370,8 @@ TextureImporter:
       Health_1: 7859028986956758064
       Health_Green: 5749519909567392684
       Red_1: -5725588911527638551
+      Setting: -6699065159252305155
+      X: -4824716200976373178
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
